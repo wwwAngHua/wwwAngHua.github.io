@@ -110,6 +110,10 @@
 
 <h2 id="一键部署"><a href="#一键部署" class="headerlink" title="一键部署"></a>一键部署</h2><p>Hexo 提供了快速方便的一键部署功能，让您只需一条命令就能将网站部署到服务器上（先在 GitHub 中建立一个名称为 &lt;您的用户名&gt;.github.io 的仓库）。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>安装 hexo-deployer-git</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
 <p>在开始之前，您必须先在 _config.yml 中修改 deploy 参数</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: <span class="string">&#x27;git&#x27;</span></span><br><span class="line">  repo: git@github.com:wwwAngHua/wwwAngHua.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
 
