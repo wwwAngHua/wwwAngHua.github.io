@@ -14,7 +14,7 @@
 <meta property="og:description" content="Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。 安装安装 Hexo 之前您需要确保电脑本地拥有 Node.js 和 Git 环境然后配置好 Git。 全局安装 Hexo 1npm install -g hexo-cli  建站安装 Hexo 完成后，请执行下列命令，Hexo 将会在指定文件夹中新建所">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-07T07:52:44.000Z">
-<meta property="article:modified_time" content="2022-08-07T08:50:13.113Z">
+<meta property="article:modified_time" content="2022-08-07T09:01:16.498Z">
 <meta property="article:author" content="王华">
 <meta property="article:tag" content="web,ios,android,html,css,js,c,java,arduino,golang,csdn,gitee,github,知乎,掘金,h5,开发者,程序员,黑客,编程,代码,开源,IT,Hacker">
 <meta name="twitter:card" content="summary">
@@ -119,7 +119,10 @@
 
 <p>至此 Hexo 安装完毕</p>
 <h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>更换主题可以前往 Github 寻找自己喜欢的主题然后使用 git 克隆到 themes 文件夹中，最后在 _config.yml 文件中修改 themes 属性即可。</p>
-<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><p><strong>清除静态文件</strong></p>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><p><strong>创建文章</strong><br>你可以执行下列命令来创建一篇新文章或者新的页面。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo new [layout] &lt;title&gt;</span><br><span class="line">vim <span class="built_in">source</span>/_posts/&lt;title&gt;.md</span><br></pre></td></tr></table></figure>
+<p>您可以在命令中指定文章的布局（layout），默认为 post，可以通过修改 _config.yml 中的 default_layout 参数来指定默认布局。</p>
+<p><strong>清除静态文件</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo c</span><br></pre></td></tr></table></figure>
 
 <p><strong>生成静态文件</strong></p>
