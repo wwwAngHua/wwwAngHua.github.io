@@ -4,15 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>王华的个人博客</title>
+  <title>Golang获取当前时间、时间戳和时间字符串及它们之间的相互转换 | 王华的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="做你该做的，做你认为正确的，不要为了谁而做，当走在你前面的人没出息地倒下或是变节的时候，你应该感到高兴；你走到你的偶像前面了，多牛逼啊。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="王华的个人博客">
-<meta property="og:url" content="http://wwwanghua.cn/index.html">
+  <meta name="description" content="1、获取当前时间123456789101112131415161718192021222324currentTime :&#x3D; time.Now() &#x2F;&#x2F; 获取当前时间，类型是Go的时间类型Timet1 :&#x3D; time.Now().Year() &#x2F;&#x2F; 年t2 :&#x3D; time.Now().Month() &#x2F;&#x2F; 月t3 :&#x3D; time.Now().Day() &#x2F;&#x2F; 日t4 :&#x3D; time.Now().Ho">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang获取当前时间、时间戳和时间字符串及它们之间的相互转换">
+<meta property="og:url" content="http://wwwanghua.cn/2022/08/08/Golang%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%97%B6%E9%97%B4%E3%80%81%E6%97%B6%E9%97%B4%E6%88%B3%E5%92%8C%E6%97%B6%E9%97%B4%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%8A%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2/index.html">
 <meta property="og:site_name" content="王华的个人博客">
-<meta property="og:description" content="做你该做的，做你认为正确的，不要为了谁而做，当走在你前面的人没出息地倒下或是变节的时候，你应该感到高兴；你走到你的偶像前面了，多牛逼啊。">
+<meta property="og:description" content="1、获取当前时间123456789101112131415161718192021222324currentTime :&#x3D; time.Now() &#x2F;&#x2F; 获取当前时间，类型是Go的时间类型Timet1 :&#x3D; time.Now().Year() &#x2F;&#x2F; 年t2 :&#x3D; time.Now().Month() &#x2F;&#x2F; 月t3 :&#x3D; time.Now().Day() &#x2F;&#x2F; 日t4 :&#x3D; time.Now().Ho">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-08T07:40:20.000Z">
+<meta property="article:modified_time" content="2022-08-08T07:58:55.101Z">
 <meta property="article:author" content="王华">
 <meta property="article:tag" content="web,ios,android,html,css,js,c,java,arduino,golang,csdn,gitee,github,知乎,掘金,h5,开发者,程序员,黑客,编程,代码,开源,IT,Hacker">
 <meta name="twitter:card" content="summary">
@@ -76,9 +78,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Golang获取当前时间、时间戳和时间字符串及它们之间的相互转换" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-Golang获取当前时间、时间戳和时间字符串及它们之间的相互转换" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/08/08/Golang%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%97%B6%E9%97%B4%E3%80%81%E6%97%B6%E9%97%B4%E6%88%B3%E5%92%8C%E6%97%B6%E9%97%B4%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%8A%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2/" class="article-date">
   <time class="dt-published" datetime="2022-08-08T07:40:20.000Z" itemprop="datePublished">2022-08-08</time>
@@ -91,8 +91,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/08/08/Golang%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%97%B6%E9%97%B4%E3%80%81%E6%97%B6%E9%97%B4%E6%88%B3%E5%92%8C%E6%97%B6%E9%97%B4%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%8A%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2/">Golang获取当前时间、时间戳和时间字符串及它们之间的相互转换</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      Golang获取当前时间、时间戳和时间字符串及它们之间的相互转换
     </h1>
   
 
@@ -124,85 +124,19 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-Hexo博客部署" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/08/07/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2/" class="article-date">
-  <time class="dt-published" datetime="2022-08-07T07:52:44.000Z" itemprop="datePublished">2022-08-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/08/07/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2/">Hexo博客部署</a>
-    </h1>
+    <a href="/2022/08/07/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Hexo博客部署</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 Hexo 之前您需要确保电脑本地拥有 Node.js 和 Git 环境然后配置好 Git。</p>
-<p><strong>全局安装 Hexo</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><p>安装 Hexo 完成后，请执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;folder&gt;</span><br><span class="line"><span class="built_in">cd</span> &lt;folder&gt;</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<h2 id="一键部署"><a href="#一键部署" class="headerlink" title="一键部署"></a>一键部署</h2><p>Hexo 提供了快速方便的一键部署功能，让您只需一条命令就能将网站部署到服务器上（先在 GitHub 中建立一个名称为 &lt;您的用户名&gt;.github.io 的仓库）。</p>
-<p><strong>安装 hexo-deployer-git</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<p>在 _config.yml 中修改 deploy 参数</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: <span class="string">&#x27;git&#x27;</span></span><br><span class="line">  repo: git@github.com:wwwAngHua/wwwAngHua.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
-<p><strong>一键部署</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>至此 Hexo 安装完毕</p>
-<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>更换主题可以前往 Github 寻找自己喜欢的主题然后使用 git 克隆到 themes 文件夹中，最后在 _config.yml 文件中修改 themes 属性即可。</p>
-<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><p><strong>创建文章</strong><br>你可以执行下列命令来创建一篇新文章或者新的页面。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo new [layout] &lt;title&gt;</span><br><span class="line">vim <span class="built_in">source</span>/_posts/&lt;title&gt;.md</span><br></pre></td></tr></table></figure>
-<p>您可以在命令中指定文章的布局（layout），默认为 post，可以通过修改 _config.yml 中的 default_layout 参数来指定默认布局。</p>
-<p><strong>清除静态文件</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo c</span><br></pre></td></tr></table></figure>
-
-<p><strong>生成静态文件</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
-
-<p><strong>本地运行</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-<p><strong>部署到远程仓库（GitHub）</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-<p><strong>一套流程</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo c &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://wwwanghua.cn/2022/08/07/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2/" data-id="cl6j12wes00004k9kbjsyfnxb" data-title="Hexo博客部署" class="article-share-link">分享</a>
-      
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
 
 
 </section>
