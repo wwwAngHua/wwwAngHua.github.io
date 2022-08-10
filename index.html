@@ -257,6 +257,11 @@
 <p><strong>一套流程</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo c &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
 
+<h2 id="解决自定义域名失效问题"><a href="#解决自定义域名失效问题" class="headerlink" title="解决自定义域名失效问题"></a>解决自定义域名失效问题</h2><p><strong>一、问题</strong><br>我们在执行 hexo d，部署到 GitHub 仓库时，发现之前设置的自定义域名失效，恢复为默认域名（仓库名），每次更新部署都需要重新设置。</p>
+<p><strong>二、解决办法</strong><br>1、打开配置文件<br>打开配置文件 _contig.yml 找到“url”，确认此处域名，为之前设置的自定义域名。</p>
+<p>2、创建 CNAME 文件<br>进入“source”文件夹，创建文件“CNAME”，填写自己的域名，“例：wwwanghua.cn”</p>
+<p><strong>三、完成</strong><br>再次执行“hexo d”更新部署，可以正常使用啦！</p>
+
       
     </div>
     <footer class="article-footer">

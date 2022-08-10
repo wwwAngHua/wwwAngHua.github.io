@@ -14,7 +14,7 @@
 <meta property="og:description" content="Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。 安装安装 Hexo 之前您需要确保电脑本地拥有 Node.js 和 Git 环境然后配置好 Git。 全局安装 Hexo 1npm install -g hexo-cli  建站安装 Hexo 完成后，请执行下列命令，Hexo 将会在指定文件夹中新建所">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-07T07:52:44.000Z">
-<meta property="article:modified_time" content="2022-08-07T09:01:16.498Z">
+<meta property="article:modified_time" content="2022-08-10T04:01:03.787Z">
 <meta property="article:author" content="王华">
 <meta property="article:tag" content="web,ios,android,html,css,js,c,java,arduino,golang,csdn,gitee,github,知乎,掘金,h5,开发者,程序员,黑客,编程,代码,开源,IT,Hacker">
 <meta name="twitter:card" content="summary">
@@ -136,6 +136,11 @@
 
 <p><strong>一套流程</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo c &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+
+<h2 id="解决自定义域名失效问题"><a href="#解决自定义域名失效问题" class="headerlink" title="解决自定义域名失效问题"></a>解决自定义域名失效问题</h2><p><strong>一、问题</strong><br>我们在执行 hexo d，部署到 GitHub 仓库时，发现之前设置的自定义域名失效，恢复为默认域名（仓库名），每次更新部署都需要重新设置。</p>
+<p><strong>二、解决办法</strong><br>1、打开配置文件<br>打开配置文件 _contig.yml 找到“url”，确认此处域名，为之前设置的自定义域名。</p>
+<p>2、创建 CNAME 文件<br>进入“source”文件夹，创建文件“CNAME”，填写自己的域名，“例：wwwanghua.cn”</p>
+<p><strong>三、完成</strong><br>再次执行“hexo d”更新部署，可以正常使用啦！</p>
 
       
     </div>
