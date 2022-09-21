@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>ESP8266开发板之WI-PWN（Wi-Fi杀手）制作教程 | 王华的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一、材料 ESP8266 开发板一块（废话） Micro-USB 数据线一根（用于电脑和 ESP8266 通讯） ESP8266 CH340G 驱动（根据自己的开发板选择，开发版背面有标注） WI-PWN 固件 烧录软件 ESP8266Flasher  二、步骤1、首先把 ESP8266 连接到电脑，安装好 CH340 驱动2、选择 Operation -&gt; COM Port -&gt; 选">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ESP8266开发板之WI-PWN（Wi-Fi杀手）制作教程">
+<meta property="og:url" content="http://wwwanghua.cn/2022/09/21/ESP8266%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B9%8BWI-PWN%EF%BC%88Wi-Fi%E6%9D%80%E6%89%8B%EF%BC%89%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="王华的个人博客">
+<meta property="og:description" content="一、材料 ESP8266 开发板一块（废话） Micro-USB 数据线一根（用于电脑和 ESP8266 通讯） ESP8266 CH340G 驱动（根据自己的开发板选择，开发版背面有标注） WI-PWN 固件 烧录软件 ESP8266Flasher  二、步骤1、首先把 ESP8266 连接到电脑，安装好 CH340 驱动2、选择 Operation -&gt; COM Port -&gt; 选">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-21T14:25:53.000Z">
+<meta property="article:modified_time" content="2022-09-21T15:01:33.838Z">
+<meta property="article:author" content="王华">
+<meta property="article:tag" content="web,ios,android,html,css,js,c,java,arduino,golang,csdn,gitee,github,知乎,掘金,h5,开发者,程序员,黑客,编程,代码,开源,IT,Hacker">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="王华的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">王华的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">不被嘲笑的梦想，是不值得去实现的</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://wwwanghua.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-ESP8266开发板之WI-PWN（Wi-Fi杀手）制作教程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/09/21/ESP8266%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B9%8BWI-PWN%EF%BC%88Wi-Fi%E6%9D%80%E6%89%8B%EF%BC%89%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2022-09-21T14:25:53.000Z" itemprop="datePublished">2022-09-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      ESP8266开发板之WI-PWN（Wi-Fi杀手）制作教程
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一、材料"><a href="#一、材料" class="headerlink" title="一、材料"></a>一、材料</h2><ul>
+<li>ESP8266 开发板一块（废话）</li>
+<li>Micro-USB 数据线一根（用于电脑和 ESP8266 通讯）</li>
+<li>ESP8266 CH340G 驱动（根据自己的开发板选择，开发版背面有标注）</li>
+<li>WI-PWN 固件</li>
+<li>烧录软件 ESP8266Flasher</li>
+</ul>
+<h2 id="二、步骤"><a href="#二、步骤" class="headerlink" title="二、步骤"></a>二、步骤</h2><p>1、首先把 ESP8266 连接到电脑，安装好 CH340 驱动<br>2、选择 Operation -&gt; COM Port -&gt; 选择 ESP8266 的端口（此电脑 -&gt; 设备管理器中可看）<br>3、选择 Config -&gt; 点击 齿轮按钮 -&gt; 选择 WI-PWN 固件文件 并设置为 -&gt; 0x00000<br>4、选择 Advanced -&gt; 并依次设置为 -&gt; Baudrate（512000） -&gt; Flash size（1MByte） -&gt; Flash speed（80MHz） -&gt; SPI Mode（QIO）<br>5、回到 Operation 点击 Flash 按钮，等待烧录完成即可<br>6、长按开发版上的 RST 按钮，LED 灯亮起即可</p>
+<h2 id="三、说明"><a href="#三、说明" class="headerlink" title="三、说明"></a>三、说明</h2><p>当重启完成后，Wi-Fi列表会多出一个名为 WI-PWN 的Wi-Fi，默认没有密码，点击连接，浏览器输入 192.168.4.1 即可进入控制面板，首次使用，设置好 SSID （网络名称）以及密码等待系统重启，重新连接即可使用。</p>
+<h2 id="四、附件"><a href="#四、附件" class="headerlink" title="四、附件"></a>四、附件</h2><p>1、WI-PWN GitHub -&gt; <a target="_blank" rel="noopener" href="https://github.com/samdenty/Wi-PWN">WI-PWN</a><br>2、HC340 驱动 -&gt; <a target="_blank" rel="noopener" href="https://www.wch.cn/download/CH341SER_EXE.html">HC340</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wwwanghua.cn/2022/09/21/ESP8266%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B9%8BWI-PWN%EF%BC%88Wi-Fi%E6%9D%80%E6%89%8B%EF%BC%89%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/" data-id="cl8br8yct0000d99k5d7o8tgp" data-title="ESP8266开发板之WI-PWN（Wi-Fi杀手）制作教程" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/08/08/MQTT%E4%B9%8BPubSubClient%E5%BA%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">MQTT之PubSubClient库</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/09/21/ESP8266%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B9%8BWI-PWN%EF%BC%88Wi-Fi%E6%9D%80%E6%89%8B%EF%BC%89%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/">ESP8266开发板之WI-PWN（Wi-Fi杀手）制作教程</a>
+          </li>
+        
+          <li>
+            <a href="/2022/08/08/MQTT%E4%B9%8BPubSubClient%E5%BA%93/">MQTT之PubSubClient库</a>
+          </li>
+        
+          <li>
+            <a href="/2022/08/08/Golang%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%97%B6%E9%97%B4%E3%80%81%E6%97%B6%E9%97%B4%E6%88%B3%E5%92%8C%E6%97%B6%E9%97%B4%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%8A%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2/">Golang获取当前时间、时间戳和时间字符串及它们之间的相互转换</a>
+          </li>
+        
+          <li>
+            <a href="/2022/08/07/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2/">Hexo博客部署</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 王华<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

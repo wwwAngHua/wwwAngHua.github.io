@@ -78,6 +78,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ESP8266开发板之WI-PWN（Wi-Fi杀手）制作教程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/09/21/ESP8266%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B9%8BWI-PWN%EF%BC%88Wi-Fi%E6%9D%80%E6%89%8B%EF%BC%89%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2022-09-21T14:25:53.000Z" itemprop="datePublished">2022-09-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/09/21/ESP8266%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B9%8BWI-PWN%EF%BC%88Wi-Fi%E6%9D%80%E6%89%8B%EF%BC%89%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/">ESP8266开发板之WI-PWN（Wi-Fi杀手）制作教程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一、材料"><a href="#一、材料" class="headerlink" title="一、材料"></a>一、材料</h2><ul>
+<li>ESP8266 开发板一块（废话）</li>
+<li>Micro-USB 数据线一根（用于电脑和 ESP8266 通讯）</li>
+<li>ESP8266 CH340G 驱动（根据自己的开发板选择，开发版背面有标注）</li>
+<li>WI-PWN 固件</li>
+<li>烧录软件 ESP8266Flasher</li>
+</ul>
+<h2 id="二、步骤"><a href="#二、步骤" class="headerlink" title="二、步骤"></a>二、步骤</h2><p>1、首先把 ESP8266 连接到电脑，安装好 CH340 驱动<br>2、选择 Operation -&gt; COM Port -&gt; 选择 ESP8266 的端口（此电脑 -&gt; 设备管理器中可看）<br>3、选择 Config -&gt; 点击 齿轮按钮 -&gt; 选择 WI-PWN 固件文件 并设置为 -&gt; 0x00000<br>4、选择 Advanced -&gt; 并依次设置为 -&gt; Baudrate（512000） -&gt; Flash size（1MByte） -&gt; Flash speed（80MHz） -&gt; SPI Mode（QIO）<br>5、回到 Operation 点击 Flash 按钮，等待烧录完成即可<br>6、长按开发版上的 RST 按钮，LED 灯亮起即可</p>
+<h2 id="三、说明"><a href="#三、说明" class="headerlink" title="三、说明"></a>三、说明</h2><p>当重启完成后，Wi-Fi列表会多出一个名为 WI-PWN 的Wi-Fi，默认没有密码，点击连接，浏览器输入 192.168.4.1 即可进入控制面板，首次使用，设置好 SSID （网络名称）以及密码等待系统重启，重新连接即可使用。</p>
+<h2 id="四、附件"><a href="#四、附件" class="headerlink" title="四、附件"></a>四、附件</h2><p>1、WI-PWN GitHub -&gt; <a target="_blank" rel="noopener" href="https://github.com/samdenty/Wi-PWN">WI-PWN</a><br>2、HC340 驱动 -&gt; <a target="_blank" rel="noopener" href="https://www.wch.cn/download/CH341SER_EXE.html">HC340</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wwwanghua.cn/2022/09/21/ESP8266%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B9%8BWI-PWN%EF%BC%88Wi-Fi%E6%9D%80%E6%89%8B%EF%BC%89%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/" data-id="cl8br8yct0000d99k5d7o8tgp" data-title="ESP8266开发板之WI-PWN（Wi-Fi杀手）制作教程" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-MQTT之PubSubClient库" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/08/08/MQTT%E4%B9%8BPubSubClient%E5%BA%93/" class="article-date">
@@ -295,7 +343,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li></ul>
     </div>
   </div>
 
@@ -306,6 +354,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2022/09/21/ESP8266%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B9%8BWI-PWN%EF%BC%88Wi-Fi%E6%9D%80%E6%89%8B%EF%BC%89%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/">ESP8266开发板之WI-PWN（Wi-Fi杀手）制作教程</a>
+          </li>
         
           <li>
             <a href="/2022/08/08/MQTT%E4%B9%8BPubSubClient%E5%BA%93/">MQTT之PubSubClient库</a>
