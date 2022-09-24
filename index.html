@@ -78,6 +78,46 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-JavaScript实现MQTT的订阅与发布系统" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/09/24/JavaScript%E5%AE%9E%E7%8E%B0MQTT%E7%9A%84%E8%AE%A2%E9%98%85%E4%B8%8E%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F/" class="article-date">
+  <time class="dt-published" datetime="2022-09-24T09:54:23.000Z" itemprop="datePublished">2022-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/09/24/JavaScript%E5%AE%9E%E7%8E%B0MQTT%E7%9A%84%E8%AE%A2%E9%98%85%E4%B8%8E%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F/">JavaScript实现MQTT的订阅与发布系统</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>最近在写项目的时候，遇到需要使用纯前端的方式实现 MQTT 的订阅与发布功能，网上找了几小时都没有找到太有用的资料；后面在 EMQ 的官方网站上找到了 JavaScript 的 SDK，于是就到该 SDK 的 GitHub 上研究了一番，总体来说，实现起来还是比较简单的，直接上代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Type&quot;</span> <span class="attr">content</span>=<span class="string">&quot;text/html; charset=utf-8&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>MQTT<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 使用 Paho MQTT （EMQX Public Server）</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> client = <span class="keyword">new</span> <span class="title class_">Paho</span>.<span class="property">MQTT</span>.<span class="title class_">Client</span>(<span class="string">&#x27;broker.emqx.io&#x27;</span>, <span class="title class_">Number</span>(<span class="number">8083</span>), <span class="string">&#x27;t1y&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 设置回调处理程序</span></span></span><br><span class="line"><span class="language-javascript">        client.<span class="property">onConnectionLost</span> = onConnectionLost; <span class="comment">// 重新连接</span></span></span><br><span class="line"><span class="language-javascript">        client.<span class="property">onMessageArrived</span> = onMessageArrived; <span class="comment">// 接收消息</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 建立 MQTT 连接</span></span></span><br><span class="line"><span class="language-javascript">        client.<span class="title function_">connect</span>(&#123;<span class="attr">onSuccess</span>: onConnect&#125;);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 客户端连接时调用</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">function</span> <span class="title function_">onConnect</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// 建立连接后订阅并发送消息</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;连接成功&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// 订阅主题</span></span></span><br><span class="line"><span class="language-javascript">            client.<span class="title function_">subscribe</span>(<span class="string">&#x27;t1y/os/apikey&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// 发送消息</span></span></span><br><span class="line"><span class="language-javascript">            message = <span class="keyword">new</span> <span class="title class_">Paho</span>.<span class="property">MQTT</span>.<span class="title class_">Message</span>(<span class="string">&#x27;Client test&#x27;</span>); <span class="comment">// 内容</span></span></span><br><span class="line"><span class="language-javascript">            message.<span class="property">destinationName</span> = <span class="string">&#x27;t1y/os/apikey&#x27;</span>; <span class="comment">// 主题</span></span></span><br><span class="line"><span class="language-javascript">            client.<span class="title function_">send</span>(message);</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 当客户端失去连接时调用</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">function</span> <span class="title function_">onConnectionLost</span>(<span class="params">responseObject</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">if</span> (responseObject.<span class="property">errorCode</span> !== <span class="number">0</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;连接丢失: &#x27;</span> + responseObject.<span class="property">errorMessage</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 消息到达时调用</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">function</span> <span class="title function_">onMessageArrived</span>(<span class="params">message</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;接收到消息: [&#x27;</span> + message.<span class="property">payloadString</span> + <span class="string">&#x27;]&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    Hello MQTT</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wwwanghua.cn/2022/09/24/JavaScript%E5%AE%9E%E7%8E%B0MQTT%E7%9A%84%E8%AE%A2%E9%98%85%E4%B8%8E%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F/" data-id="cl8fqyc3q0000bk9kbeevefts" data-title="JavaScript实现MQTT的订阅与发布系统" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-ESP8266开发板之WI-PWN（Wi-Fi杀手）制作教程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/09/21/ESP8266%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B9%8BWI-PWN%EF%BC%88Wi-Fi%E6%9D%80%E6%89%8B%EF%BC%89%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/" class="article-date">
@@ -354,6 +394,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2022/09/24/JavaScript%E5%AE%9E%E7%8E%B0MQTT%E7%9A%84%E8%AE%A2%E9%98%85%E4%B8%8E%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F/">JavaScript实现MQTT的订阅与发布系统</a>
+          </li>
         
           <li>
             <a href="/2022/09/21/ESP8266%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B9%8BWI-PWN%EF%BC%88Wi-Fi%E6%9D%80%E6%89%8B%EF%BC%89%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/">ESP8266开发板之WI-PWN（Wi-Fi杀手）制作教程</a>
