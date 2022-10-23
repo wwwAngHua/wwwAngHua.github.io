@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>Linux查找/终止进程 | 王华的个人博客</title>
+  <title>Gin框架学习笔记 | 王华的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="以前一直都是使用ps -aux | grep &quot;Str&quot;的方式，列出进程后通过 grep 过滤得到对应的 PID 进程号，然后再通过kill结束掉进程；但经常这样使用就会觉得很繁琐，于是就又研究了一下，发现了一些更方便的方式，废话不多说，直接开始： 根据字符串查找 PID1pgrep -f [搜索字符串]  根据字符串终止 PID 对应进程慎用：请注意是不是只找到一个PID 1">
+  <meta name="description" content="Param 绑定123456r.GET(&quot;&#x2F;user&#x2F;:id&#x2F;:name&quot;, func(ctx *gin.Context) &amp;#123;	ctx.JSON(http.StatusOK, gin.H&amp;#123;		&quot;id&quot;: ctx.Param(&quot;id&quot;),		&quot;name&quot;: ctx.Param(&quot;name&amp;q">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux查找&#x2F;终止进程">
-<meta property="og:url" content="http://wwwanghua.cn/2022/10/08/Linux%E6%9F%A5%E6%89%BE-%E7%BB%88%E6%AD%A2%E8%BF%9B%E7%A8%8B/index.html">
+<meta property="og:title" content="Gin框架学习笔记">
+<meta property="og:url" content="http://wwwanghua.cn/2022/10/23/Gin%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="王华的个人博客">
-<meta property="og:description" content="以前一直都是使用ps -aux | grep &quot;Str&quot;的方式，列出进程后通过 grep 过滤得到对应的 PID 进程号，然后再通过kill结束掉进程；但经常这样使用就会觉得很繁琐，于是就又研究了一下，发现了一些更方便的方式，废话不多说，直接开始： 根据字符串查找 PID1pgrep -f [搜索字符串]  根据字符串终止 PID 对应进程慎用：请注意是不是只找到一个PID 1">
+<meta property="og:description" content="Param 绑定123456r.GET(&quot;&#x2F;user&#x2F;:id&#x2F;:name&quot;, func(ctx *gin.Context) &amp;#123;	ctx.JSON(http.StatusOK, gin.H&amp;#123;		&quot;id&quot;: ctx.Param(&quot;id&quot;),		&quot;name&quot;: ctx.Param(&quot;name&amp;q">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-10-08T07:37:28.000Z">
-<meta property="article:modified_time" content="2022-10-08T07:53:27.626Z">
+<meta property="article:published_time" content="2022-10-23T06:59:43.000Z">
+<meta property="article:modified_time" content="2022-10-23T07:07:01.929Z">
 <meta property="article:author" content="王华">
 <meta property="article:tag" content="web,ios,android,html,css,js,c,java,arduino,golang,csdn,gitee,github,知乎,掘金,h5,开发者,程序员,黑客,编程,代码,开源,IT,Hacker">
 <meta name="twitter:card" content="summary">
@@ -78,10 +78,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-Linux查找-终止进程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-Gin框架学习笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2022/10/08/Linux%E6%9F%A5%E6%89%BE-%E7%BB%88%E6%AD%A2%E8%BF%9B%E7%A8%8B/" class="article-date">
-  <time class="dt-published" datetime="2022-10-08T07:37:28.000Z" itemprop="datePublished">2022-10-08</time>
+    <a href="/2022/10/23/Gin%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="dt-published" datetime="2022-10-23T06:59:43.000Z" itemprop="datePublished">2022-10-23</time>
 </a>
     
   </div>
@@ -92,7 +92,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      Linux查找/终止进程
+      Gin框架学习笔记
     </h1>
   
 
@@ -100,18 +100,12 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>以前一直都是使用<code>ps -aux | grep &quot;Str&quot;</code>的方式，列出进程后通过 grep 过滤得到对应的 PID 进程号，然后再通过kill结束掉进程；但经常这样使用就会觉得很繁琐，于是就又研究了一下，发现了一些更方便的方式，废话不多说，直接开始：</p>
-<h2 id="根据字符串查找-PID"><a href="#根据字符串查找-PID" class="headerlink" title="根据字符串查找 PID"></a>根据字符串查找 PID</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pgrep -f [搜索字符串]</span><br></pre></td></tr></table></figure>
-
-<h2 id="根据字符串终止-PID-对应进程"><a href="#根据字符串终止-PID-对应进程" class="headerlink" title="根据字符串终止 PID 对应进程"></a>根据字符串终止 PID 对应进程</h2><p>慎用：请注意是不是只找到一个PID</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkill -f [搜索字符串]</span><br></pre></td></tr></table></figure>
-
-<p>就是这么一回事，更简短的命令，很方便使用，由于我的项目名称比较复杂，所以查出来的进程基本上是唯一的，所以我就直接使用 pkill 了；但大家不清楚的情况下还是先查找 PID 看看是不是只有一个进程再结束，以免出现一些意外！另外大家做好的成熟项目在 Linux 中跑也可以在.bashrc中创建几个永久的别名保存，例如：alias xxxstop&#x3D;’pkill -f “Str”‘，这样就更方便管理自己的项目了。</p>
+        <h2 id="Param-绑定"><a href="#Param-绑定" class="headerlink" title="Param 绑定"></a>Param 绑定</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">r.GET(<span class="string">&quot;/user/:id/:name&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(ctx *gin.Context)</span></span> &#123;</span><br><span class="line">	ctx.JSON(http.StatusOK, gin.H&#123;</span><br><span class="line">		<span class="string">&quot;id&quot;</span>: ctx.Param(<span class="string">&quot;id&quot;</span>),</span><br><span class="line">		<span class="string">&quot;name&quot;</span>: ctx.Param(<span class="string">&quot;name&quot;</span>),</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://wwwanghua.cn/2022/10/08/Linux%E6%9F%A5%E6%89%BE-%E7%BB%88%E6%AD%A2%E8%BF%9B%E7%A8%8B/" data-id="cl8zmec740000m39k4f0t1l3c" data-title="Linux查找/终止进程" class="article-share-link">分享</a>
+      <a data-url="http://wwwanghua.cn/2022/10/23/Gin%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="cl9l0cn410000me9kho21a2pc" data-title="Gin框架学习笔记" class="article-share-link">分享</a>
       
       
       
@@ -121,19 +115,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2022/10/23/Gin%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          Gin框架学习笔记
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/09/24/JavaScript%E5%AE%9E%E7%8E%B0MQTT%E7%9A%84%E8%AE%A2%E9%98%85%E4%B8%8E%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2022/10/08/Linux%E6%9F%A5%E6%89%BE-%E7%BB%88%E6%AD%A2%E8%BF%9B%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">JavaScript实现MQTT的订阅与发布系统</div>
+      <div class="article-nav-title">Linux查找/终止进程</div>
     </a>
   
 </nav>
