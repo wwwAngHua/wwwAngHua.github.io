@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Go语言操作MongoDB | 王华的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="MongoDB 是目前比较流行的一个基于分布式文件存储的数据库，它是一个介于关系数据库和非关系数据库（NoSQL）之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的。因为本人最近正在研究 Golang 操作 MongoDB，但因为之前本博客程序出现了一点小问题，现在抽空解决了，所以记录一下，废话不多说，直接开始！ MongoDB 介绍MongoDB 是目前比较流行的一个基于分布式文件存储的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言操作MongoDB">
+<meta property="og:url" content="http://wwwanghua.cn/2022/11/12/Go%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9CMongoDB/index.html">
+<meta property="og:site_name" content="王华的个人博客">
+<meta property="og:description" content="MongoDB 是目前比较流行的一个基于分布式文件存储的数据库，它是一个介于关系数据库和非关系数据库（NoSQL）之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的。因为本人最近正在研究 Golang 操作 MongoDB，但因为之前本博客程序出现了一点小问题，现在抽空解决了，所以记录一下，废话不多说，直接开始！ MongoDB 介绍MongoDB 是目前比较流行的一个基于分布式文件存储的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-12T13:19:18.000Z">
+<meta property="article:modified_time" content="2022-11-13T04:24:48.011Z">
+<meta property="article:author" content="王华">
+<meta property="article:tag" content="web,ios,android,html,css,js,c,java,arduino,golang,csdn,gitee,github,知乎,掘金,h5,开发者,程序员,黑客,编程,代码,开源,IT,Hacker">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="王华的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">王华的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">不被嘲笑的梦想，是不值得去实现的</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://wwwanghua.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Go语言操作MongoDB" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/12/Go%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9CMongoDB/" class="article-date">
+  <time class="dt-published" datetime="2022-11-12T13:19:18.000Z" itemprop="datePublished">2022-11-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Go语言操作MongoDB
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>MongoDB 是目前比较流行的一个基于分布式文件存储的数据库，它是一个介于关系数据库和非关系数据库（NoSQL）之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的。因为本人最近正在研究 Golang 操作 MongoDB，但因为之前本博客程序出现了一点小问题，现在抽空解决了，所以记录一下，废话不多说，直接开始！</p>
+<h2 id="MongoDB-介绍"><a href="#MongoDB-介绍" class="headerlink" title="MongoDB 介绍"></a>MongoDB 介绍</h2><p>MongoDB 是目前比较流行的一个基于分布式文件存储的数据库，它是一个介于关系数据库和非关系数据库（NoSQL）之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的。</p>
+<p>MongoDB 中将一条数据存储为一个文档（document），数据结构由键值（key-value）对组成。 其中文档类似于我们平常编程中用到的 JSON 对象。 文档中的字段值可以包含其他文档，数组及文档数组。</p>
+<h2 id="MongoDB-相关概念"><a href="#MongoDB-相关概念" class="headerlink" title="MongoDB 相关概念"></a>MongoDB 相关概念</h2><p>MongoDB 中相关概念与我们熟悉的 SQL 概念对比如下：</p>
+<table>
+<thead>
+<tr>
+<th>MongoDB术语&#x2F;概念</th>
+<th>说明</th>
+<th>对比SQL术语&#x2F;概念</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>database</td>
+<td>数据库</td>
+<td>database</td>
+</tr>
+<tr>
+<td>collection</td>
+<td>集合</td>
+<td>table</td>
+</tr>
+<tr>
+<td>document</td>
+<td>文档</td>
+<td>row</td>
+</tr>
+<tr>
+<td>field</td>
+<td>字段</td>
+<td>column</td>
+</tr>
+<tr>
+<td>index</td>
+<td>index</td>
+<td>索引</td>
+</tr>
+<tr>
+<td>primary key</td>
+<td>主键 MongoDB自动将_id字段设置为主键</td>
+<td>primary key</td>
+</tr>
+</tbody></table>
+<h2 id="数据库常用命令"><a href="#数据库常用命令" class="headerlink" title="数据库常用命令"></a>数据库常用命令</h2><p>show dbs; -&gt; 查看数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">show dbs;</span></span><br><span class="line">admin   0.000GB</span><br><span class="line">config  0.000GB</span><br><span class="line">local   0.000GB</span><br><span class="line">test    0.000GB</span><br></pre></td></tr></table></figure>
+
+<p>use test; -&gt; 切换到指定数据库，如果不存在该数据库就创建。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">use <span class="built_in">test</span>;</span></span><br><span class="line">switched to db test</span><br></pre></td></tr></table></figure>
+
+<p>db; -&gt; 显示当前所在数据库。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">db;</span></span><br><span class="line">test</span><br></pre></td></tr></table></figure>
+
+<p>db.dropDatabase() -&gt; 删除当前数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">db.dropDatabase();</span></span><br><span class="line">&#123; &quot;ok&quot; : 1 &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据集常用命令"><a href="#数据集常用命令" class="headerlink" title="数据集常用命令"></a>数据集常用命令</h2><p>db.createCollection(name,options) -&gt; 创建数据集</p>
+<ul>
+<li>name：数据集名称</li>
+<li>options：可选参数，指定内存大小和索引。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">db.createCollection(<span class="string">&quot;student&quot;</span>);</span></span><br><span class="line">&#123; &quot;ok&quot; : 1 &#125;</span><br></pre></td></tr></table></figure>
+
+<p>show collections;：查看当前数据库中所有集合。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">show collections;</span></span><br><span class="line">student</span><br></pre></td></tr></table></figure>
+
+<p>db.student.drop()：删除指定数据集</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">db.student.drop()</span></span><br><span class="line">true</span><br></pre></td></tr></table></figure>
+
+<h2 id="文档常用命令"><a href="#文档常用命令" class="headerlink" title="文档常用命令"></a>文档常用命令</h2><p>插入一条文档：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">db.student.insertOne(&#123;name:<span class="string">&quot;小王子&quot;</span>,age:18&#125;);</span></span><br><span class="line">&#123;</span><br><span class="line">	&quot;acknowledged&quot; : true,</span><br><span class="line">	&quot;insertedId&quot; : ObjectId(&quot;5db149e904b33457f8c02509&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>插入多条文档：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">db.student.insertMany([</span></span><br><span class="line">... &#123;name:&quot;张三&quot;,age:20&#125;,</span><br><span class="line">... &#123;name:&quot;李四&quot;,age:25&#125;</span><br><span class="line">... ]);</span><br><span class="line">&#123;</span><br><span class="line">	&quot;acknowledged&quot; : true,</span><br><span class="line">	&quot;insertedIds&quot; : [</span><br><span class="line">		ObjectId(&quot;5db14c4704b33457f8c0250a&quot;),</span><br><span class="line">		ObjectId(&quot;5db14c4704b33457f8c0250b&quot;)</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>查询所有文档：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">db.student.find();</span></span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5db149e904b33457f8c02509&quot;), &quot;name&quot; : &quot;小王子&quot;, &quot;age&quot; : 18 &#125;</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5db14c4704b33457f8c0250a&quot;), &quot;name&quot; : &quot;张三&quot;, &quot;age&quot; : 20 &#125;</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5db14c4704b33457f8c0250b&quot;), &quot;name&quot; : &quot;李四&quot;, &quot;age&quot; : 25 &#125;</span><br></pre></td></tr></table></figure>
+
+<p>查询age&gt;20岁的文档：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">db.student.find(</span></span><br><span class="line">... &#123;age:&#123;$gt:20&#125;&#125;</span><br><span class="line">... )</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5db14c4704b33457f8c0250b&quot;), &quot;name&quot; : &quot;李四&quot;, &quot;age&quot; : 25 &#125;</span><br></pre></td></tr></table></figure>
+
+<p>更新文档：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">db.student.update(</span></span><br><span class="line">... &#123;name:&quot;小王子&quot;&#125;,</span><br><span class="line">... &#123;name:&quot;老王子&quot;,age:98&#125;</span><br><span class="line">... );</span><br><span class="line">WriteResult(&#123; &quot;nMatched&quot; : 1, &quot;nUpserted&quot; : 0, &quot;nModified&quot; : 1 &#125;)</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">db.student.find()</span></span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5db149e904b33457f8c02509&quot;), &quot;name&quot; : &quot;老王子&quot;, &quot;age&quot; : 98 &#125;</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5db14c4704b33457f8c0250a&quot;), &quot;name&quot; : &quot;张三&quot;, &quot;age&quot; : 20 &#125;</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5db14c4704b33457f8c0250b&quot;), &quot;name&quot; : &quot;李四&quot;, &quot;age&quot; : 25 &#125;</span><br></pre></td></tr></table></figure>
+
+<p>删除文档：</p>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">db.student.deleteOne(&#123;name:<span class="string">&quot;李四&quot;</span>&#125;);</span></span><br><span class="line">&#123; &quot;acknowledged&quot; : true, &quot;deletedCount&quot; : 1 &#125;</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">db.student.find()</span></span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5db149e904b33457f8c02509&quot;), &quot;name&quot; : &quot;老王子&quot;, &quot;age&quot; : 98 &#125;</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5db14c4704b33457f8c0250a&quot;), &quot;name&quot; : &quot;张三&quot;, &quot;age&quot; : 20 &#125;</span><br></pre></td></tr></table></figure>
+
+<p>命令实在太多，更多命令请参阅官方文档：shell命令和官方文档：CRUD操作。</p>
+<h2 id="Go语言操作mongoDB"><a href="#Go语言操作mongoDB" class="headerlink" title="Go语言操作mongoDB"></a>Go语言操作mongoDB</h2><p>我们这里使用的是官方的驱动包，当然你也可以使用第三方的驱动包（如mgo等）。 MongoDB 官方版的 Go 驱动发布的比较晚（2018年12月13号）。</p>
+<h3 id="安装MongoDB-Go驱动包"><a href="#安装MongoDB-Go驱动包" class="headerlink" title="安装MongoDB Go驱动包"></a>安装MongoDB Go驱动包</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get github.com/mongodb/mongo-go-driver</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过-Go-代码连接MongoDB"><a href="#通过-Go-代码连接MongoDB" class="headerlink" title="通过 Go 代码连接MongoDB"></a>通过 Go 代码连接MongoDB</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;context&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;log&quot;</span></span><br><span class="line">	<span class="string">&quot;go.mongodb.org/mongo-driver/mongo&quot;</span></span><br><span class="line">	<span class="string">&quot;go.mongodb.org/mongo-driver/mongo/options&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 设置客户端连接配置</span></span><br><span class="line">	clientOptions := options.Client().ApplyURI(<span class="string">&quot;mongodb://localhost:27017&quot;</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 连接到MongoDB</span></span><br><span class="line">	client, err := mongo.Connect(context.TODO(), clientOptions)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 检查连接</span></span><br><span class="line">	err = client.Ping(context.TODO(), <span class="literal">nil</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">&quot;Connected to MongoDB!&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>连接上MongoDB之后，可以通过下面的语句处理我们上面的test数据库中的student数据集了：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 指定获取要操作的数据集</span></span><br><span class="line">collection := client.Database(<span class="string">&quot;test&quot;</span>).Collection(<span class="string">&quot;student&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>处理完任务之后可以通过下面的命令断开与MongoDB的连接：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 断开连接</span></span><br><span class="line">err = client.Disconnect(context.TODO())</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	log.Fatal(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(<span class="string">&quot;Connection to MongoDB closed.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="连接池模式"><a href="#连接池模式" class="headerlink" title="连接池模式"></a>连接池模式</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;context&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">	<span class="string">&quot;go.mongodb.org/mongo-driver/mongo&quot;</span></span><br><span class="line">	<span class="string">&quot;go.mongodb.org/mongo-driver/mongo/options&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ConnectToDB</span><span class="params">(uri, name <span class="type">string</span>, timeout time.Duration, num <span class="type">uint64</span>)</span></span> (*mongo.Database, <span class="type">error</span>) &#123;</span><br><span class="line">	ctx, cancel := context.WithTimeout(context.Background(), timeout)</span><br><span class="line">	<span class="keyword">defer</span> cancel()</span><br><span class="line">	o := options.Client().ApplyURI(uri)</span><br><span class="line">	o.SetMaxPoolSize(num)</span><br><span class="line">	client, err := mongo.Connect(ctx, o)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> client.Database(name), <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="BSON"><a href="#BSON" class="headerlink" title="BSON"></a>BSON</h3><p>MongoDB 中的 JSON 文档存储在名为 BSON（二进制编码的 JSON）的二进制表示中。与其他将 JSON 数据存储为简单字符串和数字的数据库不同，BSON 编码扩展了 JSON 表示，使其包含额外的类型，如int、long、date、浮点数和decimal128。这使得应用程序更容易可靠地处理、排序和比较数据。</p>
+<p>连接 MongoDB 的 Go 驱动程序中有两大类型表示 BSON 数据：D 和 Raw。</p>
+<p>类型 D 家族被用来简洁地构建使用本地 Go 类型的 BSON 对象。这对于构造传递给 MongoDB 的命令特别有用。D 家族包括四类:</p>
+<ul>
+<li>D：一个BSON文档。这种类型应该在顺序重要的情况下使用，比如MongoDB命令。</li>
+<li>M：一张无序的map。它和D是一样的，只是它不保持顺序。</li>
+<li>A：一个BSON数组。</li>
+<li>E：D里面的一个元素。<br>要使用 BSON，需要先导入下面的包：</li>
+</ul>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;go.mongodb.org/mongo-driver/bson&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>下面是一个使用D类型构建的过滤器文档的例子，它可以用来查找name字段与‘张三’或‘李四’匹配的文档：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bson.D<span class="punctuation">&#123;</span><span class="punctuation">&#123;</span></span><br><span class="line">	<span class="string">&quot;name&quot;</span><span class="punctuation">,</span></span><br><span class="line">	bson.D<span class="punctuation">&#123;</span><span class="punctuation">&#123;</span></span><br><span class="line">		<span class="string">&quot;$in&quot;</span><span class="punctuation">,</span></span><br><span class="line">		bson.A<span class="punctuation">&#123;</span><span class="string">&quot;张三&quot;</span><span class="punctuation">,</span> <span class="string">&quot;李四&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="punctuation">&#125;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>Raw 类型家族用于验证字节切片。你还可以使用 Lookup() 从原始类型检索单个元素。如果你不想要将 BSON 反序列化成另一种类型的开销，那么这是非常有用的。这个教程我们将只使用 D 类型。</p>
+<h3 id="CRUD"><a href="#CRUD" class="headerlink" title="CRUD"></a>CRUD</h3><p>我们现在Go代码中定义一个Studet类型如下：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Student <span class="keyword">struct</span> &#123;</span><br><span class="line">	Name <span class="type">string</span></span><br><span class="line">	Age <span class="type">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来，创建一些Student类型的值，准备插入到数据库中：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s1 := Student&#123;<span class="string">&quot;小红&quot;</span>, <span class="number">12</span>&#125;</span><br><span class="line">s2 := Student&#123;<span class="string">&quot;小兰&quot;</span>, <span class="number">10</span>&#125;</span><br><span class="line">s3 := Student&#123;<span class="string">&quot;小黄&quot;</span>, <span class="number">11</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="插入文档"><a href="#插入文档" class="headerlink" title="插入文档"></a>插入文档</h4><p>使用 collection.InsertOne() 方法插入一条文档记录：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">insertResult, err := collection.InsertOne(context.TODO(), s1)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	log.Fatal(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(<span class="string">&quot;Inserted a single document: &quot;</span>, insertResult.InsertedID)</span><br></pre></td></tr></table></figure>
+
+<p>使用 collection.InsertMany() 方法插入多条文档记录：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">students := []<span class="keyword">interface</span>&#123;&#125;&#123;s2, s3&#125;</span><br><span class="line">insertManyResult, err := collection.InsertMany(context.TODO(), students)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	log.Fatal(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(<span class="string">&quot;Inserted multiple documents: &quot;</span>, insertManyResult.InsertedIDs)</span><br></pre></td></tr></table></figure>
+
+<h4 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h4><p>updateone() 方法允许你更新单个文档。它需要一个筛选器文档来匹配数据库中的文档，并需要一个更新文档来描述更新操作。你可以使用 bson.D 类型来构建筛选文档和更新文档：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">filter := bson.D&#123;&#123;<span class="string">&quot;name&quot;</span>, <span class="string">&quot;小兰&quot;</span>&#125;&#125;</span><br><span class="line"></span><br><span class="line">update := bson.D&#123;</span><br><span class="line">	&#123;<span class="string">&quot;$inc&quot;</span>, bson.D&#123;</span><br><span class="line">		&#123;<span class="string">&quot;age&quot;</span>, <span class="number">1</span>&#125;,</span><br><span class="line">	&#125;&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来，就可以通过下面的语句找到小兰，给他增加一岁了：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">updateResult, err := collection.UpdateOne(context.TODO(), filter, update)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	log.Fatal(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Printf(<span class="string">&quot;Matched %v documents and updated %v documents.\n&quot;</span>, updateResult.MatchedCount, updateResult.ModifiedCount)</span><br></pre></td></tr></table></figure>
+
+<h4 id="查找文档"><a href="#查找文档" class="headerlink" title="查找文档"></a>查找文档</h4><p>要找到一个文档，你需要一个 filter 文档，以及一个指向可以将结果解码为其值的指针。要查找单个文档，使用 collection.FindOne()。这个方法返回一个可以解码为值的结果。</p>
+<p>我们使用上面定义过的那个 filter 来查找姓名为 小兰 的文档。</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个Student变量用来接收查询的结果</span></span><br><span class="line"><span class="keyword">var</span> result Student</span><br><span class="line">err = collection.FindOne(context.TODO(), filter).Decode(&amp;result)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	log.Fatal(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Printf(<span class="string">&quot;Found a single document: %+v\n&quot;</span>, result)</span><br></pre></td></tr></table></figure>
+
+<p>要查找多个文档，请使用collection.Find()。此方法返回一个游标。游标提供了一个文档流，你可以通过它一次迭代和解码一个文档。当游标用完之后，应该关闭游标。下面的示例将使用options包设置一个限制以便只返回两个文档。</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询多个</span></span><br><span class="line"><span class="comment">// 将选项传递给Find()</span></span><br><span class="line">findOptions := options.Find()</span><br><span class="line">findOptions.SetLimit(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个切片用来存储查询结果</span></span><br><span class="line"><span class="keyword">var</span> results []*Student</span><br><span class="line"></span><br><span class="line"><span class="comment">// 把bson.D&#123;&#123;&#125;&#125;作为一个filter来匹配所有文档</span></span><br><span class="line">cur, err := collection.Find(context.TODO(), bson.D&#123;&#123;&#125;&#125;, findOptions)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	log.Fatal(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查找多个文档返回一个光标</span></span><br><span class="line"><span class="comment">// 遍历游标允许我们一次解码一个文档</span></span><br><span class="line"><span class="keyword">for</span> cur.Next(context.TODO()) &#123;</span><br><span class="line">	<span class="comment">// 创建一个值，将单个文档解码为该值</span></span><br><span class="line">	<span class="keyword">var</span> elem Student</span><br><span class="line">	err := cur.Decode(&amp;elem)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line">	results = <span class="built_in">append</span>(results, &amp;elem)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> err := cur.Err(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">	log.Fatal(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 完成后关闭游标</span></span><br><span class="line">cur.Close(context.TODO())</span><br><span class="line">fmt.Printf(<span class="string">&quot;Found multiple documents (array of pointers): %#v\n&quot;</span>, results)</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h4>
+最后，可以使用 collection.DeleteOne() 或 collection.DeleteMany() 删除文档。如果你传递 bson.D{{}} 作为过滤器参数，它将匹配数据集中的所有文档。还可以使用 collection. drop() 删除整个数据集。
+
+
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除名字是小黄的那个</span></span><br><span class="line">deleteResult1, err := collection.DeleteOne(context.TODO(), bson.D&#123;&#123;<span class="string">&quot;name&quot;</span>,<span class="string">&quot;小黄&quot;</span>&#125;&#125;)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	log.Fatal(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Printf(<span class="string">&quot;Deleted %v documents in the trainers collection\n&quot;</span>, deleteResult1.DeletedCount)</span><br><span class="line"><span class="comment">// 删除所有</span></span><br><span class="line">deleteResult2, err := collection.DeleteMany(context.TODO(), bson.D&#123;&#123;&#125;&#125;)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	log.Fatal(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Printf(<span class="string">&quot;Deleted %v documents in the trainers collection\n&quot;</span>, deleteResult2.DeletedCount)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wwwanghua.cn/2022/11/12/Go%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9CMongoDB/" data-id="cladzq9zg0000x39k4kj36k94" data-title="Go语言操作MongoDB" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/11/12/Restful_API%E8%A7%84%E8%8C%83/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Restful API规范</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/11/12/Go%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9CMongoDB/">Go语言操作MongoDB</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/12/Restful_API%E8%A7%84%E8%8C%83/">Restful API规范</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/23/Gin%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Gin框架学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/08/Linux%E6%9F%A5%E6%89%BE-%E7%BB%88%E6%AD%A2%E8%BF%9B%E7%A8%8B/">Linux查找/终止进程</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/24/JavaScript%E5%AE%9E%E7%8E%B0MQTT%E7%9A%84%E8%AE%A2%E9%98%85%E4%B8%8E%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F/">JavaScript实现MQTT的订阅与发布系统</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 王华<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
