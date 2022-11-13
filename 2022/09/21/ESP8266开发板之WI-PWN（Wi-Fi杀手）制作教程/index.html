@@ -3,40 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  
-  <title>ESP8266开发板之WI-PWN（Wi-Fi杀手）制作教程 | 王华的个人博客</title>
+  <title>ESP8266开发板之WI-PWN（Wi-Fi杀手）制作教程 | Wang Hua&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="一、材料 ESP8266 开发板一块（废话） Micro-USB 数据线一根（用于电脑和 ESP8266 通讯） ESP8266 CH340G 驱动（根据自己的开发板选择，开发版背面有标注） WI-PWN 固件 烧录软件 ESP8266Flasher  二、步骤1、首先把 ESP8266 连接到电脑，安装好 CH340 驱动2、选择 Operation -&gt; COM Port -&gt; 选">
-<meta property="og:type" content="article">
-<meta property="og:title" content="ESP8266开发板之WI-PWN（Wi-Fi杀手）制作教程">
-<meta property="og:url" content="http://wwwanghua.cn/2022/09/21/ESP8266%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B9%8BWI-PWN%EF%BC%88Wi-Fi%E6%9D%80%E6%89%8B%EF%BC%89%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/index.html">
-<meta property="og:site_name" content="王华的个人博客">
-<meta property="og:description" content="一、材料 ESP8266 开发板一块（废话） Micro-USB 数据线一根（用于电脑和 ESP8266 通讯） ESP8266 CH340G 驱动（根据自己的开发板选择，开发版背面有标注） WI-PWN 固件 烧录软件 ESP8266Flasher  二、步骤1、首先把 ESP8266 连接到电脑，安装好 CH340 驱动2、选择 Operation -&gt; COM Port -&gt; 选">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-09-21T14:25:53.000Z">
-<meta property="article:modified_time" content="2022-09-21T15:01:33.838Z">
-<meta property="article:author" content="王华">
-<meta property="article:tag" content="web,ios,android,html,css,js,c,java,arduino,golang,csdn,gitee,github,知乎,掘金,h5,开发者,程序员,黑客,编程,代码,开源,IT,Hacker">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="王华的个人博客" type="application/atom+xml">
-  
   
     <link rel="shortcut icon" href="/favicon.png">
   
   
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
-
-  
-  
 <link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
 <meta name="generator" content="Hexo 6.2.0"></head>
 
 <body>
@@ -47,11 +21,11 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">王华的个人博客</a>
+        <a href="/" id="logo">Wang Hua&#39;s Blog</a>
       </h1>
       
         <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">不被嘲笑的梦想，是不值得去实现的</a>
+          <a href="/" id="subtitle">The longest journey begins with the first step.</a>
         </h2>
       
     </div>
@@ -63,16 +37,13 @@
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
-      </nav>
-      <nav id="sub-nav">
+          <a class="main-nav-link" href="/categories">Categories</a>
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+          <a class="main-nav-link" href="/tags">Tags</a>
         
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+          <a class="main-nav-link" href="/about">About</a>
+        
       </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://wwwanghua.cn"></form>
-      </div>
     </div>
   </div>
 </header>
@@ -114,7 +85,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://wwwanghua.cn/2022/09/21/ESP8266%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B9%8BWI-PWN%EF%BC%88Wi-Fi%E6%9D%80%E6%89%8B%EF%BC%89%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/" data-id="cl8br8yct0000d99k5d7o8tgp" data-title="ESP8266开发板之WI-PWN（Wi-Fi杀手）制作教程" class="article-share-link">分享</a>
+      <a data-url="http://wwwanghua.cn/2022/09/21/ESP8266%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B9%8BWI-PWN%EF%BC%88Wi-Fi%E6%9D%80%E6%89%8B%EF%BC%89%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/" data-id="cl8br8yct0000d99k5d7o8tgp" data-title="ESP8266开发板之WI-PWN（Wi-Fi杀手）制作教程" class="article-share-link">Share</a>
       
       
       
@@ -125,7 +96,7 @@
 <nav id="article-nav">
   
     <a href="/2022/09/24/JavaScript%E5%AE%9E%E7%8E%B0MQTT%E7%9A%84%E8%AE%A2%E9%98%85%E4%B8%8E%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           JavaScript实现MQTT的订阅与发布系统
@@ -135,7 +106,7 @@
   
   
     <a href="/2022/08/08/MQTT%E4%B9%8BPubSubClient%E5%BA%93/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">后一篇</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">MQTT之PubSubClient库</div>
     </a>
   
@@ -146,30 +117,14 @@
 
 
 </section>
-        
-          <aside id="sidebar">
+        <aside id="sidebar">
   
     
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li></ul>
-    </div>
-  </div>
-
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -198,26 +153,41 @@
   </div>
 
   
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li></ul>
+    </div>
+  </div>
+
+  
 </aside>
-        
       </div>
       <footer id="footer">
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      
-      &copy; 2022 王华<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      &copy; 2022 By Autoload<br>
+      Driven - <a href="https://hexo.io/" target="_blank">Hexo</a>|Theme - <a href="https://github.com/autoload/hexo-theme-auto" target="_blank">Auto</a>
     </div>
   </div>
 </footer>
-
     </div>
     <nav id="mobile-nav">
   
     <a href="/" class="mobile-nav-link">Home</a>
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav>
     
@@ -226,15 +196,7 @@
 <script src="/js/jquery-3.4.1.min.js"></script>
 
 
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
 <script src="/js/script.js"></script>
-
 
 
 

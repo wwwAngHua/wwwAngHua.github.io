@@ -3,40 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  
-  <title>Linux查找/终止进程 | 王华的个人博客</title>
+  <title>Linux查找/终止进程 | Wang Hua&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="以前一直都是使用ps -aux | grep &quot;Str&quot;的方式，列出进程后通过 grep 过滤得到对应的 PID 进程号，然后再通过kill结束掉进程；但经常这样使用就会觉得很繁琐，于是就又研究了一下，发现了一些更方便的方式，废话不多说，直接开始： 根据字符串查找 PID1pgrep -f [搜索字符串]  根据字符串终止 PID 对应进程慎用：请注意是不是只找到一个PID 1">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Linux查找&#x2F;终止进程">
-<meta property="og:url" content="http://wwwanghua.cn/2022/10/08/Linux%E6%9F%A5%E6%89%BE-%E7%BB%88%E6%AD%A2%E8%BF%9B%E7%A8%8B/index.html">
-<meta property="og:site_name" content="王华的个人博客">
-<meta property="og:description" content="以前一直都是使用ps -aux | grep &quot;Str&quot;的方式，列出进程后通过 grep 过滤得到对应的 PID 进程号，然后再通过kill结束掉进程；但经常这样使用就会觉得很繁琐，于是就又研究了一下，发现了一些更方便的方式，废话不多说，直接开始： 根据字符串查找 PID1pgrep -f [搜索字符串]  根据字符串终止 PID 对应进程慎用：请注意是不是只找到一个PID 1">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-10-08T07:37:28.000Z">
-<meta property="article:modified_time" content="2022-10-08T07:53:27.626Z">
-<meta property="article:author" content="王华">
-<meta property="article:tag" content="web,ios,android,html,css,js,c,java,arduino,golang,csdn,gitee,github,知乎,掘金,h5,开发者,程序员,黑客,编程,代码,开源,IT,Hacker">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="王华的个人博客" type="application/atom+xml">
-  
   
     <link rel="shortcut icon" href="/favicon.png">
   
   
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
-
-  
-  
 <link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
 <meta name="generator" content="Hexo 6.2.0"></head>
 
 <body>
@@ -47,11 +21,11 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">王华的个人博客</a>
+        <a href="/" id="logo">Wang Hua&#39;s Blog</a>
       </h1>
       
         <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">不被嘲笑的梦想，是不值得去实现的</a>
+          <a href="/" id="subtitle">The longest journey begins with the first step.</a>
         </h2>
       
     </div>
@@ -63,16 +37,13 @@
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
-      </nav>
-      <nav id="sub-nav">
+          <a class="main-nav-link" href="/categories">Categories</a>
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+          <a class="main-nav-link" href="/tags">Tags</a>
         
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+          <a class="main-nav-link" href="/about">About</a>
+        
       </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://wwwanghua.cn"></form>
-      </div>
     </div>
   </div>
 </header>
@@ -111,7 +82,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://wwwanghua.cn/2022/10/08/Linux%E6%9F%A5%E6%89%BE-%E7%BB%88%E6%AD%A2%E8%BF%9B%E7%A8%8B/" data-id="cl8zmec740000m39k4f0t1l3c" data-title="Linux查找/终止进程" class="article-share-link">分享</a>
+      <a data-url="http://wwwanghua.cn/2022/10/08/Linux%E6%9F%A5%E6%89%BE-%E7%BB%88%E6%AD%A2%E8%BF%9B%E7%A8%8B/" data-id="cl8zmec740000m39k4f0t1l3c" data-title="Linux查找/终止进程" class="article-share-link">Share</a>
       
       
       
@@ -122,7 +93,7 @@
 <nav id="article-nav">
   
     <a href="/2022/10/23/Gin%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           Gin框架学习笔记
@@ -132,7 +103,7 @@
   
   
     <a href="/2022/09/24/JavaScript%E5%AE%9E%E7%8E%B0MQTT%E7%9A%84%E8%AE%A2%E9%98%85%E4%B8%8E%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">后一篇</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">JavaScript实现MQTT的订阅与发布系统</div>
     </a>
   
@@ -143,30 +114,14 @@
 
 
 </section>
-        
-          <aside id="sidebar">
+        <aside id="sidebar">
   
     
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li></ul>
-    </div>
-  </div>
-
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -195,26 +150,41 @@
   </div>
 
   
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li></ul>
+    </div>
+  </div>
+
+  
 </aside>
-        
       </div>
       <footer id="footer">
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      
-      &copy; 2022 王华<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      &copy; 2022 By Autoload<br>
+      Driven - <a href="https://hexo.io/" target="_blank">Hexo</a>|Theme - <a href="https://github.com/autoload/hexo-theme-auto" target="_blank">Auto</a>
     </div>
   </div>
 </footer>
-
     </div>
     <nav id="mobile-nav">
   
     <a href="/" class="mobile-nav-link">Home</a>
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav>
     
@@ -223,15 +193,7 @@
 <script src="/js/jquery-3.4.1.min.js"></script>
 
 
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
 <script src="/js/script.js"></script>
-
 
 
 
