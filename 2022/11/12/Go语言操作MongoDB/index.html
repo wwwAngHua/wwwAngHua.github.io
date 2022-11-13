@@ -14,7 +14,7 @@
 <meta property="og:description" content="MongoDB 是目前比较流行的一个基于分布式文件存储的数据库，它是一个介于关系数据库和非关系数据库（NoSQL）之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的。因为本人最近正在研究 Golang 操作 MongoDB，但因为之前本博客程序出现了一点小问题，现在抽空解决了，所以记录一下，废话不多说，直接开始！ MongoDB 介绍MongoDB 是目前比较流行的一个基于分布式文件存储的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-12T13:19:18.000Z">
-<meta property="article:modified_time" content="2022-11-13T04:24:48.011Z">
+<meta property="article:modified_time" content="2022-11-13T04:36:23.548Z">
 <meta property="article:author" content="王华">
 <meta property="article:tag" content="web,ios,android,html,css,js,c,java,arduino,golang,csdn,gitee,github,知乎,掘金,h5,开发者,程序员,黑客,编程,代码,开源,IT,Hacker">
 <meta name="twitter:card" content="summary">
@@ -188,7 +188,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">db.student.deleteOne(&#123;name:<span class="string">&quot;李四&quot;</span>&#125;);</span></span><br><span class="line">&#123; &quot;acknowledged&quot; : true, &quot;deletedCount&quot; : 1 &#125;</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">db.student.find()</span></span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5db149e904b33457f8c02509&quot;), &quot;name&quot; : &quot;老王子&quot;, &quot;age&quot; : 98 &#125;</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5db14c4704b33457f8c0250a&quot;), &quot;name&quot; : &quot;张三&quot;, &quot;age&quot; : 20 &#125;</span><br></pre></td></tr></table></figure>
 
 <p>命令实在太多，更多命令请参阅官方文档：shell命令和官方文档：CRUD操作。</p>
-<h2 id="Go语言操作mongoDB"><a href="#Go语言操作mongoDB" class="headerlink" title="Go语言操作mongoDB"></a>Go语言操作mongoDB</h2><p>我们这里使用的是官方的驱动包，当然你也可以使用第三方的驱动包（如mgo等）。 MongoDB 官方版的 Go 驱动发布的比较晚（2018年12月13号）。</p>
+<h2 id="Go语言操作MongoDB"><a href="#Go语言操作MongoDB" class="headerlink" title="Go语言操作MongoDB"></a>Go语言操作MongoDB</h2><p>我们这里使用的是官方的驱动包，当然你也可以使用第三方的驱动包（如mgo等）。 MongoDB 官方版的 Go 驱动发布的比较晚（2018年12月13号）。</p>
 <h3 id="安装MongoDB-Go驱动包"><a href="#安装MongoDB-Go驱动包" class="headerlink" title="安装MongoDB Go驱动包"></a>安装MongoDB Go驱动包</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get github.com/mongodb/mongo-go-driver</span><br></pre></td></tr></table></figure>
 
 <h3 id="通过-Go-代码连接MongoDB"><a href="#通过-Go-代码连接MongoDB" class="headerlink" title="通过 Go 代码连接MongoDB"></a>通过 Go 代码连接MongoDB</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;context&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;log&quot;</span></span><br><span class="line">	<span class="string">&quot;go.mongodb.org/mongo-driver/mongo&quot;</span></span><br><span class="line">	<span class="string">&quot;go.mongodb.org/mongo-driver/mongo/options&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 设置客户端连接配置</span></span><br><span class="line">	clientOptions := options.Client().ApplyURI(<span class="string">&quot;mongodb://localhost:27017&quot;</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 连接到MongoDB</span></span><br><span class="line">	client, err := mongo.Connect(context.TODO(), clientOptions)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 检查连接</span></span><br><span class="line">	err = client.Ping(context.TODO(), <span class="literal">nil</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">&quot;Connected to MongoDB!&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -228,7 +228,7 @@
 <p>使用 collection.InsertMany() 方法插入多条文档记录：</p>
 <figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">students := []<span class="keyword">interface</span>&#123;&#125;&#123;s2, s3&#125;</span><br><span class="line">insertManyResult, err := collection.InsertMany(context.TODO(), students)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	log.Fatal(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(<span class="string">&quot;Inserted multiple documents: &quot;</span>, insertManyResult.InsertedIDs)</span><br></pre></td></tr></table></figure>
 
-<h4 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h4><p>updateone() 方法允许你更新单个文档。它需要一个筛选器文档来匹配数据库中的文档，并需要一个更新文档来描述更新操作。你可以使用 bson.D 类型来构建筛选文档和更新文档：</p>
+<h4 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h4><p>UpdateOne() 方法允许你更新单个文档。它需要一个筛选器文档来匹配数据库中的文档，并需要一个更新文档来描述更新操作。你可以使用 bson.D 类型来构建筛选文档和更新文档：</p>
 <figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">filter := bson.D&#123;&#123;<span class="string">&quot;name&quot;</span>, <span class="string">&quot;小兰&quot;</span>&#125;&#125;</span><br><span class="line"></span><br><span class="line">update := bson.D&#123;</span><br><span class="line">	&#123;<span class="string">&quot;$inc&quot;</span>, bson.D&#123;</span><br><span class="line">		&#123;<span class="string">&quot;age&quot;</span>, <span class="number">1</span>&#125;,</span><br><span class="line">	&#125;&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>接下来，就可以通过下面的语句找到小兰，给他增加一岁了：</p>
@@ -259,6 +259,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2022/11/13/MongoDB%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E5%8F%8A%E9%85%8D%E7%BD%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          MongoDB用户权限管理及配置
+        
+      </div>
+    </a>
   
   
     <a href="/2022/11/12/Restful_API%E8%A7%84%E8%8C%83/" id="article-nav-older" class="article-nav-link-wrap">
@@ -301,6 +310,10 @@
       <ul>
         
           <li>
+            <a href="/2022/11/13/MongoDB%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E5%8F%8A%E9%85%8D%E7%BD%AE/">MongoDB用户权限管理及配置</a>
+          </li>
+        
+          <li>
             <a href="/2022/11/12/Go%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9CMongoDB/">Go语言操作MongoDB</a>
           </li>
         
@@ -314,10 +327,6 @@
         
           <li>
             <a href="/2022/10/08/Linux%E6%9F%A5%E6%89%BE-%E7%BB%88%E6%AD%A2%E8%BF%9B%E7%A8%8B/">Linux查找/终止进程</a>
-          </li>
-        
-          <li>
-            <a href="/2022/09/24/JavaScript%E5%AE%9E%E7%8E%B0MQTT%E7%9A%84%E8%AE%A2%E9%98%85%E4%B8%8E%E5%8F%91%E5%B8%83%E7%B3%BB%E7%BB%9F/">JavaScript实现MQTT的订阅与发布系统</a>
           </li>
         
       </ul>
