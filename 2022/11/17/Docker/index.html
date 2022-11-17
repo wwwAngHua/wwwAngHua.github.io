@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Docker | Wang Hua&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Wang Hua&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">The longest journey begins with the first step.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Docker" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/17/Docker/" class="article-date">
+  <time class="dt-published" datetime="2022-11-17T01:00:08.000Z" itemprop="datePublished">2022-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Docker
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/docker/docker.png" alt="alt docker"></p>
+<hr>
+<p>Docker is software that provides containers, which allows teams to emulate development environments. Docker began as an internal project, initially developed by dotCloud engineers.</p>
+<hr>
+<h3 id="Start-useing-docker"><a href="#Start-useing-docker" class="headerlink" title="Start useing docker"></a>Start useing docker</h3><h4 id="Full-image"><a href="#Full-image" class="headerlink" title="Full image"></a>Full image</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker full &lt;name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Start-container"><a href="#Start-container" class="headerlink" title="Start container"></a>Start container</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run &lt;container id/name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Start-a-stopped-container"><a href="#Start-a-stopped-container" class="headerlink" title="Start a stopped container"></a>Start a stopped container</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start &lt;container id/name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Stop-an-already-container"><a href="#Stop-an-already-container" class="headerlink" title="Stop an already container"></a>Stop an already container</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop &lt;container id/name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Two-ways-to-get-into-the-container"><a href="#Two-ways-to-get-into-the-container" class="headerlink" title="Two ways to get into the container"></a>Two ways to get into the container</h4><ol>
+<li><p>docker attach<br>Causes the container to stop if exiting the inter action.</p>
+</li>
+<li><p>docker exec<br>Exit the container without affecting the operation.</p>
+</li>
+</ol>
+<p>*** Start the interactive container ***</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t &lt;container id/name&gt; /bin/bash</span><br></pre></td></tr></table></figure>
+
+<h4 id="Export-container"><a href="#Export-container" class="headerlink" title="Export container"></a>Export container</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker export &lt;container id/name&gt; &lt;filename&gt;.tar</span><br></pre></td></tr></table></figure>
+
+<h4 id="Import-container"><a href="#Import-container" class="headerlink" title="Import container"></a>Import container</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;filename&gt;.tar | docker import - &lt;name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Delete-container"><a href="#Delete-container" class="headerlink" title="Delete container"></a>Delete container</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm -f &lt;container&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Remove-all-stopped-container"><a href="#Remove-all-stopped-container" class="headerlink" title="Remove all stopped container"></a>Remove all stopped container</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container prune</span><br></pre></td></tr></table></figure>
+
+<h4 id="View-the-internal-process-of-the-container"><a href="#View-the-internal-process-of-the-container" class="headerlink" title="View the internal process of the container"></a>View the internal process of the container</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker top &lt;container id/name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Delete-image"><a href="#Delete-image" class="headerlink" title="Delete image"></a>Delete image</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi &lt;image name&gt;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>Run parameter</th>
+<th>Explain</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-i</td>
+<td>Interactive</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>Terminal</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>Program running in the background</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>Port Mapping (Host:Pc:80-&gt;Container:80)</td>
+</tr>
+<tr>
+<td>-name</td>
+<td>Container name</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wwwanghua.cn/2022/11/17/Docker/" data-id="clakfe2600000k29k8jouacdw" data-title="Docker" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/11/13/MongoDB%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E5%8F%8A%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MongoDB用户权限管理及配置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/11/17/Docker/">Docker</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/13/MongoDB%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E5%8F%8A%E9%85%8D%E7%BD%AE/">MongoDB用户权限管理及配置</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/12/Go%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9CMongoDB/">Go语言操作MongoDB</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/12/Restful_API%E8%A7%84%E8%8C%83/">Restful API规范</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/23/Gin%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Gin框架学习笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li></ul>
+    </div>
+  </div>
+
+  
+</aside>
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 By Autoload<br>
+      Driven - <a href="https://hexo.io/" target="_blank">Hexo</a>|Theme - <a href="https://github.com/autoload/hexo-theme-auto" target="_blank">Auto</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

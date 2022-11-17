@@ -51,6 +51,105 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Docker" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/17/Docker/" class="article-date">
+  <time class="dt-published" datetime="2022-11-17T01:00:08.000Z" itemprop="datePublished">2022-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/11/17/Docker/">Docker</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/docker/docker.png" alt="alt docker"></p>
+<hr>
+<p>Docker is software that provides containers, which allows teams to emulate development environments. Docker began as an internal project, initially developed by dotCloud engineers.</p>
+<hr>
+<h3 id="Start-useing-docker"><a href="#Start-useing-docker" class="headerlink" title="Start useing docker"></a>Start useing docker</h3><h4 id="Full-image"><a href="#Full-image" class="headerlink" title="Full image"></a>Full image</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker full &lt;name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Start-container"><a href="#Start-container" class="headerlink" title="Start container"></a>Start container</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run &lt;container id/name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Start-a-stopped-container"><a href="#Start-a-stopped-container" class="headerlink" title="Start a stopped container"></a>Start a stopped container</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start &lt;container id/name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Stop-an-already-container"><a href="#Stop-an-already-container" class="headerlink" title="Stop an already container"></a>Stop an already container</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop &lt;container id/name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Two-ways-to-get-into-the-container"><a href="#Two-ways-to-get-into-the-container" class="headerlink" title="Two ways to get into the container"></a>Two ways to get into the container</h4><ol>
+<li><p>docker attach<br>Causes the container to stop if exiting the inter action.</p>
+</li>
+<li><p>docker exec<br>Exit the container without affecting the operation.</p>
+</li>
+</ol>
+<p>*** Start the interactive container ***</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t &lt;container id/name&gt; /bin/bash</span><br></pre></td></tr></table></figure>
+
+<h4 id="Export-container"><a href="#Export-container" class="headerlink" title="Export container"></a>Export container</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker export &lt;container id/name&gt; &lt;filename&gt;.tar</span><br></pre></td></tr></table></figure>
+
+<h4 id="Import-container"><a href="#Import-container" class="headerlink" title="Import container"></a>Import container</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;filename&gt;.tar | docker import - &lt;name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Delete-container"><a href="#Delete-container" class="headerlink" title="Delete container"></a>Delete container</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm -f &lt;container&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Remove-all-stopped-container"><a href="#Remove-all-stopped-container" class="headerlink" title="Remove all stopped container"></a>Remove all stopped container</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container prune</span><br></pre></td></tr></table></figure>
+
+<h4 id="View-the-internal-process-of-the-container"><a href="#View-the-internal-process-of-the-container" class="headerlink" title="View the internal process of the container"></a>View the internal process of the container</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker top &lt;container id/name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Delete-image"><a href="#Delete-image" class="headerlink" title="Delete image"></a>Delete image</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi &lt;image name&gt;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>Run parameter</th>
+<th>Explain</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-i</td>
+<td>Interactive</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>Terminal</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>Program running in the background</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>Port Mapping (Host:Pc:80-&gt;Container:80)</td>
+</tr>
+<tr>
+<td>-name</td>
+<td>Container name</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wwwanghua.cn/2022/11/17/Docker/" data-id="clakfe2600000k29k8jouacdw" data-title="Docker" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-MongoDB用户权限管理及配置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/11/13/MongoDB%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E5%8F%8A%E9%85%8D%E7%BD%AE/" class="article-date">
@@ -686,86 +785,12 @@
 
 
   
-    <article id="post-Hexo博客部署" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/08/07/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2/" class="article-date">
-  <time class="dt-published" datetime="2022-08-07T07:52:44.000Z" itemprop="datePublished">2022-08-07</time>
-</a>
+
+
+  <nav id="page-nav">
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/08/07/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2/">Hexo博客部署</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 Hexo 之前您需要确保电脑本地拥有 Node.js 和 Git 环境然后配置好 Git。</p>
-<p><strong>全局安装 Hexo</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><p>安装 Hexo 完成后，请执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;folder&gt;</span><br><span class="line"><span class="built_in">cd</span> &lt;folder&gt;</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<h2 id="一键部署"><a href="#一键部署" class="headerlink" title="一键部署"></a>一键部署</h2><p>Hexo 提供了快速方便的一键部署功能，让您只需一条命令就能将网站部署到服务器上（先在 GitHub 中建立一个名称为 &lt;您的用户名&gt;.github.io 的仓库）。</p>
-<p><strong>安装 hexo-deployer-git</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<p>在 _config.yml 中修改 deploy 参数</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: <span class="string">&#x27;git&#x27;</span></span><br><span class="line">  repo: git@github.com:wwwAngHua/wwwAngHua.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
-<p><strong>一键部署</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>至此 Hexo 安装完毕</p>
-<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>更换主题可以前往 Github 寻找自己喜欢的主题然后使用 git 克隆到 themes 文件夹中，最后在 _config.yml 文件中修改 themes 属性即可。</p>
-<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><p><strong>创建文章</strong><br>你可以执行下列命令来创建一篇新文章或者新的页面。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo new [layout] &lt;title&gt;</span><br><span class="line">vim <span class="built_in">source</span>/_posts/&lt;title&gt;.md</span><br></pre></td></tr></table></figure>
-<p>您可以在命令中指定文章的布局（layout），默认为 post，可以通过修改 _config.yml 中的 default_layout 参数来指定默认布局。</p>
-<p><strong>清除静态文件</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo c</span><br></pre></td></tr></table></figure>
-
-<p><strong>生成静态文件</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
-
-<p><strong>本地运行</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-<p><strong>部署到远程仓库（GitHub）</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-<p><strong>一套流程</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo c &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-
-<h2 id="解决自定义域名失效问题"><a href="#解决自定义域名失效问题" class="headerlink" title="解决自定义域名失效问题"></a>解决自定义域名失效问题</h2><p><strong>一、问题</strong><br>我们在执行 hexo d，部署到 GitHub 仓库时，发现之前设置的自定义域名失效，恢复为默认域名（仓库名），每次更新部署都需要重新设置。</p>
-<p><strong>二、解决办法</strong><br>1、打开配置文件<br>打开配置文件 _contig.yml 找到“url”，确认此处域名，为之前设置的自定义域名。</p>
-<p>2、创建 CNAME 文件<br>进入“source”文件夹，创建文件“CNAME”，填写自己的域名，“例：wwwanghua.cn”</p>
-<p><strong>三、完成</strong><br>再次执行“hexo d”更新部署，可以正常使用啦！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://wwwanghua.cn/2022/08/07/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2/" data-id="cl6j12wes00004k9kbjsyfnxb" data-title="Hexo博客部署" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 </section>
         <aside id="sidebar">
   
@@ -777,6 +802,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2022/11/17/Docker/">Docker</a>
+          </li>
         
           <li>
             <a href="/2022/11/13/MongoDB%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E5%8F%8A%E9%85%8D%E7%BD%AE/">MongoDB用户权限管理及配置</a>
@@ -792,10 +821,6 @@
         
           <li>
             <a href="/2022/10/23/Gin%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Gin框架学习笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2022/10/08/Linux%E6%9F%A5%E6%89%BE-%E7%BB%88%E6%AD%A2%E8%BF%9B%E7%A8%8B/">Linux查找/终止进程</a>
           </li>
         
       </ul>
