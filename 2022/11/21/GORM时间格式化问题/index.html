@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>GORM时间格式化问题 | Wang Hua&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Wang Hua&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">The longest journey begins with the first step.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-GORM时间格式化问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/21/GORM%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96%E9%97%AE%E9%A2%98/" class="article-date">
+  <time class="dt-published" datetime="2022-11-21T12:08:16.000Z" itemprop="datePublished">2022-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      GORM时间格式化问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>在做项目的时候，遇到 Gorm 添加进数据库的数据时间格式是没有问题的，但想要查询返回给前端的时候就会发现时间格式是这样的：“2022-07-03T22:14:02.973528+08:00”，带着时区和毫秒，但其实往往这样的格式不是我们想要的。废话不多说直接上代码，主要就是 JOSN 的序列化和反序列化的问题。</p>
+<h3 id="定义一个-Time-类型"><a href="#定义一个-Time-类型" class="headerlink" title="定义一个 Time 类型"></a>定义一个 Time 类型</h3><p>在model下面新建一个 time.go 文件，定义一个 Time 类型，主要就是做 JSON 的序列化和反序列化。</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> model</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;database/sql/driver&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> timeFormat = <span class="string">&quot;2006-01-02 15:04:05&quot;</span></span><br><span class="line"><span class="keyword">const</span> timezone = <span class="string">&quot;Asia/Shanghai&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Time time.Time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t Time)</span></span> MarshalJSON() ([]<span class="type">byte</span>, <span class="type">error</span>) &#123;</span><br><span class="line">	b := <span class="built_in">make</span>([]<span class="type">byte</span>, <span class="number">0</span>, <span class="built_in">len</span>(timeFormat)+<span class="number">2</span>)</span><br><span class="line">	b = <span class="built_in">append</span>(b, <span class="string">&#x27;&quot;&#x27;</span>)</span><br><span class="line">	b = time.Time(t).AppendFormat(b, timeFormat)</span><br><span class="line">	b = <span class="built_in">append</span>(b, <span class="string">&#x27;&quot;&#x27;</span>)</span><br><span class="line">	<span class="keyword">return</span> b, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Time)</span></span> UnmarshalJSON(data []<span class="type">byte</span>) (err <span class="type">error</span>) &#123;</span><br><span class="line">	now, err := time.ParseInLocation(<span class="string">`&quot;`</span>+timeFormat+<span class="string">`&quot;`</span>, <span class="type">string</span>(data), time.Local)</span><br><span class="line">	*t = Time(now)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t Time)</span></span> String() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> time.Time(t).Format(timeFormat)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t Time)</span></span> local() time.Time &#123;</span><br><span class="line">	loc, _ := time.LoadLocation(timezone)</span><br><span class="line">	<span class="keyword">return</span> time.Time(t).In(loc)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t Time)</span></span> Value() (driver.Value, <span class="type">error</span>) &#123;</span><br><span class="line">	<span class="keyword">var</span> zeroTime time.Time</span><br><span class="line">	<span class="keyword">var</span> ti = time.Time(t)</span><br><span class="line">	<span class="keyword">if</span> ti.UnixNano() == zeroTime.UnixNano() &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ti, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Time)</span></span> Scan(v <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	value, ok := v.(time.Time)</span><br><span class="line">	<span class="keyword">if</span> ok &#123;</span><br><span class="line">		*t = Time(value)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> fmt.Errorf(<span class="string">&quot;can not convert %v to timestamp&quot;</span>, v)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="将数据库结构体中的类型改为-Time-类型"><a href="#将数据库结构体中的类型改为-Time-类型" class="headerlink" title="将数据库结构体中的类型改为 Time 类型"></a>将数据库结构体中的类型改为 Time 类型</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> model</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	Name      <span class="type">string</span>   <span class="string">`json:&quot;name&quot; gorm:&quot;type:varchar(32);not null&quot;`</span></span><br><span class="line">	CreatedAt Time     <span class="string">`json:&quot;created_at&quot; gorm:&quot;type:timestamp&quot;`</span></span><br><span class="line">	UpdatedAt Time     <span class="string">`json:&quot;updated_at&quot; gorm:&quot;type:timestamp&quot;`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此完美解决！！！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://wwwanghua.cn/2022/11/21/GORM%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96%E9%97%AE%E9%A2%98/" data-id="claqrberu0000n79kcwki39am" data-title="GORM时间格式化问题" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/11/17/Docker/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Docker</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/11/21/GORM%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96%E9%97%AE%E9%A2%98/">GORM时间格式化问题</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/17/Docker/">Docker</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/13/MongoDB%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E5%8F%8A%E9%85%8D%E7%BD%AE/">MongoDB用户权限管理及配置</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/12/Go%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9CMongoDB/">Go语言操作MongoDB</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/12/Restful_API%E8%A7%84%E8%8C%83/">Restful API规范</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li></ul>
+    </div>
+  </div>
+
+  
+</aside>
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 By Autoload<br>
+      Driven - <a href="https://hexo.io/" target="_blank">Hexo</a>|Theme - <a href="https://github.com/autoload/hexo-theme-auto" target="_blank">Auto</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
